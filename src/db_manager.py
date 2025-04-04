@@ -20,7 +20,6 @@ class DBManager:
 
                 for row in cur:
                     table.add_row(list(row))
-                print("Список вакансий по запросу:\n")
                 print(table)
 
         conn.close()
@@ -35,6 +34,7 @@ class DBManager:
             FROM vacancies
             JOIN employers using (employer_id)
             WHERE vacancy_name like '%{search_query}%'
+            LIMIT 10
             """
         )
 
@@ -47,6 +47,7 @@ class DBManager:
             SELECT DISTINCT employer_name, open_vacancies
             FROM employers
             JOIN vacancies using (employer_id)
+            LIMIT 10
             """
         )
 
@@ -60,6 +61,7 @@ class DBManager:
             SELECT employer_name, vacancy_name, salary, vacancy_url
             FROM vacancies
             JOIN employers using (employer_id)
+            LIMIT 10
             """
         )
 
@@ -71,6 +73,7 @@ class DBManager:
             """
             SELECT avg(salary) as avg_salary
             FROM vacancies
+            LIMIT 10
             """
         )
 
@@ -84,5 +87,6 @@ class DBManager:
             FROM vacancies
             JOIN employers using (employer_id)
             WHERE salary > (SELECT AVG(salary) AS avg_salary FROM vacancies)
+            LIMIT 10
             """
         )

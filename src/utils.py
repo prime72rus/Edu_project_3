@@ -3,8 +3,6 @@ from typing import Any, Dict, List
 
 import psycopg2
 
-# from dotenv import load_dotenv
-
 
 def create_database(database_name: str, params: dict) -> None:
     """

@@ -8,11 +8,11 @@ class DBManager:
     """
 
     def __init__(self, database_name: str, params: dict):
-        self.database_name = database_name
-        self.params = params
+        self.__database_name = database_name
+        self.__params = params
 
     def __connect_to_db(self, query: str) -> None:
-        with psycopg2.connect(dbname=self.database_name, **self.params) as conn:
+        with psycopg2.connect(dbname=self.__database_name, **self.__params) as conn:
             with conn.cursor() as cur:
                 cur.execute(query)
                 table = PrettyTable()
